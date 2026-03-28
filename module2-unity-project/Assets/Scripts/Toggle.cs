@@ -8,7 +8,7 @@ public class Toggle : MonoBehaviour, IHittable
 {
     public Sprite toggleOn;
     public Sprite toggleOff;
-
+    public AudioClip hitSound;
     // we should hide this because we do not want other developers
     // attempting to connect this Unity Event in the editor
     [HideInInspector]
@@ -17,14 +17,18 @@ public class Toggle : MonoBehaviour, IHittable
     bool toggleState = false;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    AudioSource audioSource;
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         if (OnToggle == null)
         {
             OnToggle = new UnityEvent<bool>();
         }
+
+
     }
 
     void UpdateState()
@@ -37,6 +41,9 @@ public class Toggle : MonoBehaviour, IHittable
     {
         toggleState = !toggleState;
         UpdateState();
+  
+
+        audioSource.PlayOneShot(hitSound); // Play the sound immediately once
 
         OnToggle.Invoke(toggleState);
     }

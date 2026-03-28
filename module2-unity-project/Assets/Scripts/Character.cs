@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float gravity = -9.81f;
     public float throwForce = 1.0f;
+    public float jumpHeight = 2f;
 
     public Rock rockPrefab;
 
@@ -28,6 +29,7 @@ public class Character : MonoBehaviour
 
     bool shortRangeAttack = true;
     bool startRockSpawn = false;
+    bool isGrounded;
     float rockTimer = 0.0f;
 
     void Awake()
@@ -83,9 +85,10 @@ public class Character : MonoBehaviour
     void PlayerMotion()
     {
         // the following is pretty standard character controller code
-        
+
         // snap the player to the ground if already grounded
         // when jumping, gravity takes over
+        isGrounded = controller.isGrounded;
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -118,6 +121,11 @@ public class Character : MonoBehaviour
             );
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded) //if te key E is pressed and the player is grounded Jump!
+        {
+            // The formula for jump velocity is: v = sqrt(jumpHeight * -2 * gravity)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
         // set the speed for the animator to change idle/walk states
         animator.SetFloat("Speed", horizontalVelocity.magnitude);
     }

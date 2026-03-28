@@ -21,13 +21,15 @@ public class WallEye : MonoBehaviour, IHittable
 
     [HideInInspector]
     public UnityEvent<WallEyeState> OnEyeStateChanged;
-
+    public AudioClip defeatSound;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    AudioSource audioSource;
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         if (OnEyeStateChanged == null)
         {
             OnEyeStateChanged = new UnityEvent<WallEyeState>();
@@ -76,6 +78,7 @@ public class WallEye : MonoBehaviour, IHittable
                 break;
             case WallEyeState.Defeated:
                 spriteRenderer.sprite = eyeDefeated;
+                audioSource.PlayOneShot(defeatSound); // Play the sound immediately
                 break;
         }
         animator.SetTrigger("StartHit");
