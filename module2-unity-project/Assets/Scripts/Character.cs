@@ -11,19 +11,19 @@ public class Character : MonoBehaviour
     Animator animator;
     Collider shovelCollider;
 
-    public float moveSpeed = 5.0f;
-    public float gravity = -9.81f;
-    public float throwForce = 1.0f;
-    public float jumpHeight = 2f;
+    public float moveSpeed = 5.0f;//player speed
+    public float gravity = -9.81f;//player gravity
+    public float throwForce = 1.0f;//player throw force
+    public float jumpHeight = 2f;//player jump height
 
-    public Rock rockPrefab;
+    public Rock rockPrefab;//get rock
 
     public InputActionReference moveInput;
     public InputActionReference attackInput;
     public InputActionReference weaponSwitchInput;
     public Shovel shovel;
 
-    public Rock rock;
+    public Rock rock;//get shovel
     
     public GameObject armRight;
 
@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     bool isGrounded;
     float rockTimer = 0.0f;
 
-    void Awake()
+    void Awake()//gets char controller, animator, and collider for shovel
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -71,7 +71,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        bool weaponSwitch = weaponSwitchInput.action.WasPressedThisFrame();
+        bool weaponSwitch = weaponSwitchInput.action.WasPressedThisFrame();//weapon swapping
         if (weaponSwitch)
         {
             shortRangeAttack = !shortRangeAttack;
@@ -121,7 +121,7 @@ public class Character : MonoBehaviour
             );
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && isGrounded) //if te key E is pressed and the player is grounded Jump!
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded) //if the key E is pressed and the player is grounded Jump!
         {
             // The formula for jump velocity is: v = sqrt(jumpHeight * -2 * gravity)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -158,7 +158,7 @@ public class Character : MonoBehaviour
         return Vector3.zero;
     }
 
-    void SpawnRockDelay()
+    void SpawnRockDelay()//adds a delay to the rock throw
     {
         rockTimer += Time.deltaTime;
         if (rockTimer >= 0.5f)

@@ -20,7 +20,7 @@ public class Toggle : MonoBehaviour, IHittable
     AudioSource audioSource;
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();//getting the audio, sprites and animator
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         if (OnToggle == null)
@@ -31,13 +31,13 @@ public class Toggle : MonoBehaviour, IHittable
 
     }
 
-    void UpdateState()
+    void UpdateState()//updates the state the button is on depending on if it is hit
     {
         spriteRenderer.sprite = toggleState ? toggleOn : toggleOff;
         animator.SetTrigger("StartHit");
     }
 
-    public void Hit(GameObject gameObject)
+    public void Hit(GameObject gameObject) //if the button is hit by gameobject change the state and play a sound
     {
         toggleState = !toggleState;
         UpdateState();

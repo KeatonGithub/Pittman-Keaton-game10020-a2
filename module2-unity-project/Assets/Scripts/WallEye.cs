@@ -25,7 +25,7 @@ public class WallEye : MonoBehaviour, IHittable
     SpriteRenderer spriteRenderer;
     Animator animator;
     AudioSource audioSource;
-    void Awake()
+    void Awake()//getting the audio, sprites and animator
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();

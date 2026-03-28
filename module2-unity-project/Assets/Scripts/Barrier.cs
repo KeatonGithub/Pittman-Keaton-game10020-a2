@@ -5,9 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Barrier : MonoBehaviour
 {
-    public Vector3 upTarget = new Vector3(0, -1, 0);
-    public Vector3 downTarget = new Vector3(0, -1, 0);
-    public float speed = 1.0f;
+    public Vector3 upTarget = new Vector3(0, -1, 0);//up position
+    public Vector3 downTarget = new Vector3(0, -1, 0);//down position
+    public float speed = 1.0f;// the speed the wall barrier/bridge moves
 
     bool moveDownCommand = false;
     bool moveUpCommand = false;
